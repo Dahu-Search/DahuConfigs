@@ -1,0 +1,84 @@
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "def-surface-svc"
+  labels:
+    app: def-surface
+    release: v1
+    env: dev
+  annotations:
+    cloud.google.com/app-protocols: '{"def-gui-https":"HTTPS","def-gui-http":"HTTP"}'
+spec:
+  type: "NodePort"
+  ports:
+  - name: "def-gui-https"
+    port: 443
+    targetPort: 443
+    protocol: TCP
+  - name: "def-gui-http"
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: "def-surface"
+    release: "v1"
+    component: "server"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: def-surface
+  labels:
+    app: def-surface
+    release: v1
+    env: dev
+    component: server
+    def_component: aodocs_surface
+spec:
+  volumes:
+  - name: def-surface-disk
+    gcePersistentDisk:
+      pdName: surface-disk
+      fsType: ext4
+  - name: config-roles
+    configMap:
+      name: roles
+  - name: config-docroot
+    configMap:
+      name: docroot
+  nodeSelector:
+    servicetype: "def"
+  containers:
+  - name: def-surface
+    image: gcr.io/dahu-search-connector/defsurface:v3.4
+    imagePullPolicy: Always
+    ports:
+    - containerPort: 443
+      name: def-gui-https
+      protocol: TCP
+    - containerPort: 80
+      name: def-gui-http
+      protocol: TCP
+    env:
+    - name: PORT
+      value: "443"
+    volumeMounts:
+    - name: def-surface-disk
+      mountPath: /var/deflogs
+    - name: config-roles
+      mountPath: /etc/config/roles
+    - name: config-docroot
+      mountPath: /etc/config/docroot
+    livenessProbe:
+      httpGet:
+        path: /healthcheck/ping
+        port: 80
+      initialDelaySeconds: 10
+      periodSeconds: 10
+    readinessProbe:
+      httpGet:
+        path: /healthcheck/ping
+        port: 80
+      initialDelaySeconds: 10
+      periodSeconds: 10

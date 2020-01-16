@@ -1,0 +1,14 @@
+{
+  "*@dahu.co.uk": {
+    "roles": "admin,search"
+  },
+  "*@cabinetoffice.gov.uk": {
+    "roles": "search"
+  },
+  "*@altirnao.com": {
+    "roles": "search"
+  },
+  "*@aodocs.com": {
+    "roles": "search"
+  }
+}

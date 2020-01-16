@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dahu-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: dahu-aodocs-search-global
+    kubernetes.io/ingress.allow-http: "true"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: def-surface-svc
+              servicePort: 443

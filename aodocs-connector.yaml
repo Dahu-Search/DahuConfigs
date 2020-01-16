@@ -1,0 +1,69 @@
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "def-svc"
+  labels:
+    app: def-connector
+    release: v1
+    env: dev
+  annotations:
+    {}
+spec:
+  type: "ClusterIP"
+  ports:
+    - port: 10102
+      name: "def-client"
+  selector:
+    app: "def-connector"
+    release: "v1"
+    component: "server"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: def-connector
+  labels:
+    app: def-connector
+    release: v1
+    env: dev
+    component: server
+    def_component: aodocs_connector
+spec:
+  volumes:
+    - name: connector-disk
+      gcePersistentDisk:
+        pdName: connector-disk
+        fsType: ext4
+    - name: config-servicefile
+      configMap:
+        name: servicefile
+    - name: config-libraries
+      configMap:
+        name: libraries
+  nodeSelector:
+    servicetype: "def"
+  containers:
+    - name: def-connector
+      image: gcr.io/dahu-search-connector/defserver:v3.4
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 10102
+          name: def-connector
+          protocol: TCP
+      env:
+        - name: PORT
+          value: "10102"
+        - name: "AODOCS_DOMAIN_ADMIN"
+          value: "vince@dahu.co.uk"
+        - name:  "APPNAME"
+          value: "Dahu Search"
+      volumeMounts:
+        - name: connector-disk
+          mountPath: /var/deflogs
+        - name: config-servicefile
+          mountPath: /etc/config/servicefile
+        - name: config-libraries
+          mountPath: /etc/config/libraries
+
+
