@@ -353,7 +353,7 @@ spec:
           resources:
             {}
           nodeSelector:
-            servicetype: solr
+            servicetype: "solr"
           ports:
           - containerPort: 8983
             name: solr-client
