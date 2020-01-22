@@ -310,6 +310,8 @@ spec:
         fsGroup: 8983
       affinity:
         {}
+      nodeSelector:
+        servicetype: solr
       terminationGracePeriodSeconds: 180
       volumes:
         - name: solr-xml
@@ -352,8 +354,6 @@ spec:
           imagePullPolicy: Always
           resources:
             {}
-          nodeSelector:
-            servicetype: "solr"
           ports:
           - containerPort: 8983
             name: solr-client
@@ -404,3 +404,4 @@ spec:
         resources:
           requests:
             storage: 20Gi
+
