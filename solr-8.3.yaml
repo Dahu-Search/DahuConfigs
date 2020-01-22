@@ -194,8 +194,6 @@ spec:
       securityContext:
         fsGroup: 1000
         runAsUser: 1000
-      nodeSelector:
-        def_zk: true
       containers:
 
         - name: zookeeper
@@ -355,7 +353,7 @@ spec:
           resources:
             {}
           nodeSelector:
-            def_type: solr
+            servicetype: solr
           ports:
           - containerPort: 8983
             name: solr-client
