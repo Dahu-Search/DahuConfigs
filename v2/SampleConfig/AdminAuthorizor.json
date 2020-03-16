@@ -1,0 +1,19 @@
+{
+  "DEFSettings":{},
+  "pluginSettings": {
+    "resources": {
+      "admin": {
+        "roles": "admin"
+      },
+      "api": {
+        "roles": "admin,api"
+      },
+      "api/Surface": {
+        "roles": "search"
+      },
+      "admin/ping" : {
+        "roles": "EVERYONE"
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "DEFSettings":{},
+  "pluginSettings":{
+    "name":"AODocsConnectorStore",
+    "google_service_jsonfile_path":  {"type": "env","values": {"env_name": "GOOGLE_SERVICE_ACCOUNT_JSON_PATH","default": "./service.json"}}
+  }
+}

@@ -1,0 +1,120 @@
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "def-surface-svc"
+  labels:
+    app: def-surface
+    release: v1
+    env: dev
+  annotations:
+    cloud.google.com/app-protocols: '{"def-gui-https":"HTTPS","def-gui-http":"HTTP"}'
+spec:
+  type: "NodePort"
+  ports:
+    - name: "def-gui-https"
+      port: 443
+      targetPort: 443
+      protocol: TCP
+    - name: "def-gui-http"
+      port: 80
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: "def-surface"
+    release: "v1"
+    component: "server"
+---
+apiVersion: networking.gke.io/v1beta1
+kind: ManagedCertificate
+metadata:
+  name: search-cabinetoffice-certificate
+spec:
+  domains:
+    - cabinetoffice.gov.uk
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dahu-ingress
+  annotations:
+    ingress.kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.global-static-ip-name: dahuaodocs-surface
+    kubernetes.io/ingress.allow-http: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    networking.gke.io/managed-certificates: search-cabinetoffice-certificate
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: def-surface-svc
+              servicePort: 443
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: def
+  labels:
+    app: def
+    release: v1
+    env: dev
+    component: server
+spec:
+  volumes:
+    - name: def-disk
+      gcePersistentDisk:
+        pdName: def
+        fsType: ext4
+    - name: service-account
+      configMap:
+        name: service
+  nodeSelector:
+    servicetype: def
+  containers:
+    - name: def-connector
+      image: eu.gcr.io/caboffice/dahu_combined:v3.6
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 443
+          name: def-gui-https
+          protocol: TCP
+        - containerPort: 80
+          name: def-gui-http
+          protocol: TCP
+        - containerPort: 10102
+          name: def-connector
+          protocol: TCP
+      livenessProbe:
+        httpGet:
+          path: /healthcheck/ping
+          port: 80
+        initialDelaySeconds: 240
+        periodSeconds: 10
+      readinessProbe:
+        httpGet:
+          path: /healthcheck/ping
+          port: 80
+        initialDelaySeconds: 240
+        periodSeconds: 10
+      volumeMounts:
+        - name: def-disk
+          mountPath: /data
+        - name: service-account
+          mountPath: /tmp/service.json
+      env:
+        - name: GIT_APP_NAME
+          value: DahuSearchForAODocs-CabOffice-OPC
+        - name: AODOCS_DOMAIN_ADMIN
+          value: john.mills@cabinetoffice.gov.uk
+        - name: APPNAME
+          value: "Dahu Search"
+        - name: GIT_REPO
+          value: dahu.codebasehq.com
+        - name: GIT_REPO_URL
+          value: "https://dahu.codebasehq.com/client-kits/customer-kits.git"
+        - name: GIT_USERNAME
+          value: vince%40dahu.co.uk
+        - name: GIT_PASSWORD
+          value: *********
