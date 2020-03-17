@@ -21,7 +21,7 @@ spec:
       targetPort: 80
       protocol: TCP
   selector:
-    app: "def-surface"
+    app: "def"
     release: "v1"
     component: "server"
 ---
@@ -31,7 +31,7 @@ metadata:
   name: search-cabinetoffice-certificate
 spec:
   domains:
-    - cabinetoffice.gov.uk
+    - opc.cabinetoffice.gov.uk
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -39,9 +39,9 @@ metadata:
   name: dahu-ingress
   annotations:
     ingress.kubernetes.io/ingress.class: nginx
-    kubernetes.io/ingress.global-static-ip-name: dahuaodocs-surface
-    kubernetes.io/ingress.allow-http: "false"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.global-static-ip-name: dahu-aodocs-search-global
+    kubernetes.io/ingress.allow-http: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
     networking.gke.io/managed-certificates: search-cabinetoffice-certificate
 spec:
   rules:
@@ -73,8 +73,8 @@ spec:
   nodeSelector:
     servicetype: def
   containers:
-    - name: def-connector
-      image: eu.gcr.io/caboffice/dahu_combined:v3.6
+    - name: def
+      image: eu.gcr.io/co-opc-gmail-importer-staging/def_combined:v3.7.1
       imagePullPolicy: Always
       ports:
         - containerPort: 443
@@ -82,9 +82,6 @@ spec:
           protocol: TCP
         - containerPort: 80
           name: def-gui-http
-          protocol: TCP
-        - containerPort: 10102
-          name: def-connector
           protocol: TCP
       livenessProbe:
         httpGet:
@@ -117,4 +114,4 @@ spec:
         - name: GIT_USERNAME
           value: vince%40dahu.co.uk
         - name: GIT_PASSWORD
-          value: *********
+          value: nuXgig-0qucve-heddep
