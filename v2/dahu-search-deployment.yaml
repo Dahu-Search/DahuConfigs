@@ -102,16 +102,16 @@ spec:
           mountPath: /tmp/service.json
       env:
         - name: GIT_APP_NAME
-          value: DahuSearchForAODocs-CabOffice-OPC
+          value: name-of-folder-in-your-git-repository
         - name: AODOCS_DOMAIN_ADMIN
-          value: john.mills@cabinetoffice.gov.uk
+          value: admin-account-with-gdrive-scopes@domain.gov
         - name: APPNAME
           value: "Dahu Search"
         - name: GIT_REPO
-          value: dahu.codebasehq.com
+          value: your.git.repo.com
         - name: GIT_REPO_URL
-          value: "https://dahu.codebasehq.com/client-kits/customer-kits.git"
+          value: "https://your.git.repo.com/client-kits/customer-kits.git"
         - name: GIT_USERNAME
           value: vince%40dahu.co.uk
         - name: GIT_PASSWORD
-          value: nuXgig-0qucve-heddep
+          value: ******
