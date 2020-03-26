@@ -19,7 +19,7 @@
         "name": "Surface",
         "jar": "DahuSurface.jar",
         "class": "com.dahu.surface.commands.Surface",
-        "settingsFile": "surface.json"
+        "settingsFile": "Surface.json"
       }
   ],
   "proxies":[
