@@ -1,0 +1,55 @@
+{
+  "DEFSettings":{
+    "inputQueues":["seed_queue"],
+    "outputQueues":["vector_queue"],
+    "stores":["AODocsConnectorStore"],
+    "serviceGroup":"AODocs",
+    "runAtStartup":"true"
+  },
+  "pluginSettings":{
+    "interval":"900000",
+    "runAtStartup":"true",
+    "autoStart":"true",
+    "google_service_jsonfile_path":  {"type": "env","values": {"env_name": "GOOGLE_SERVICE_ACCOUNT_JSON_PATH","default": "./service.json"}},
+    "libraries": [
+      {
+        "libraryId":"RU21mOk454PO1uUXrV",
+        "name":"[STAGING] OPC Records (Official Folder)",
+        "domainName":"cabinetoffice.gov.uk",
+        "storageAdmin":"information.manager403@cabinetoffice.gov.uk",
+        "documentTypes": {
+          "items": [        {
+            "name":"Bill",
+            "value":"RVL1wci9mNqRNRwQbN"
+          },
+            {
+              "name":"Correspondence",
+              "value":"RVL1ws32pTQBHKwXI8"
+            }
+          ]
+        }
+      },
+      {
+        "libraryId":"RU25BUc0TVHtkt8jBg",
+        "name":"[STAGING] OPC Archives (Official Folder)",
+        "domainName":"cabinetoffice.gov.uk",
+        "storageAdmin":"information.manager404@cabinetoffice.gov.uk",
+        "documentTypes": {
+          "items": [        {
+            "name":"Correspondence",
+            "value":"RVpP5LctoJ1Op9vGiO"
+          },
+            {
+              "name":"Know-How",
+              "value":"ReJWaTKvUDHxao90j6"
+            },
+            {
+              "name":"Act",
+              "value":"RVpPBcu0Xf7hguquLJ"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
