@@ -1,0 +1,22 @@
+{
+  "DEFSettings" : {
+    "stores" : [ "AODocsLibraryStore" ],
+    "serviceGroup" : "AODocs Events"
+  },
+  "pluginSettings" : {
+    "autoStart" : "true",
+    "GoogleSubscriptionID" : "Dahu_Qww20KE2LROQHALs5X_sub",
+    "GoogleProjectID" : "dahu-search",
+    "libraryId" : "Qww20KE2LROQHALs5X",
+    "vector_queue_name" : "vector_queue",
+    "connector_queue_name" : "seed_queue",
+    "components" : {
+      "SolrIndexer" : {
+        "solr_index" : "aodocs_index",
+        "solr_hostname" : "localhost",
+        "solr_zkport" : "8983",
+        "solrSchemaMap" : "AODocsSolrSchema.json"
+      }
+    }
+  }
+}

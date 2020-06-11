@@ -1,0 +1,119 @@
+{
+  "logLevel":"DEBUG",
+  "name":"DEF 4 AODocs",
+  "threads":"40",
+  "admin":"true",
+  "adminUI":"false",
+  "DEFprotocol": "https",
+  "httpPort": "80",
+  "httpsPort": "443",
+  "plugins":".",
+  "crossOrigin":"true",
+  "responseVersion":"2",
+  "securityTokenTTL":"3600",
+  "DEFPermitsFile": "DEFPermitMap.json",
+  "google_application_credentials": "service.json",
+  "searchUI": "true",
+  "apps": [
+    {
+      "app": "DahuSearch",
+      "path": "./docRoot/DahuSearch",
+	  "default": "yes"
+    }
+	],
+	"commands":[
+      {
+        "name": "Surface",
+        "jar": "DahuSurface.jar",
+        "class": "com.dahu.surface.commands.Surface",
+        "settingsFile": "Surface.json"
+      }
+  ],
+  "proxies":[
+  ],
+  "services":[
+	  {
+	      "name" : "AODocsCrawler",
+	      "jar" : "DahuEdge.jar",
+	      "class" : "com.dahu.plugins.edge.aodocs.AODocsConnector",
+	      "settingsFile" : "AODocsLibraries.json",
+	      "threads" : "1"
+	    }, {
+	      "name" : "Vector",
+	      "class" : "com.dahu.vector.core.VectorService",
+	      "settingsFile" : "vector.json",
+	      "threads" : "1"
+	    }, {
+	      "name" : "PubSub_ReIiGJk0N4RY9XokGj",
+	      "jar" : "DahuEdge.jar",
+	      "class" : "com.dahu.plugins.edge.aodocs.AODocsAuditGooglePubSubMessageDispatcher",
+	      "settingsFile" : "PubSub_RozD8WgvhCPcz9NRkf.json",
+	      "threads" : "1"
+	    }
+  ],
+  "stores":[
+    {
+      "name":"AODocsLibraryStore",
+      "jar":"DahuEdge.jar",
+      "class":"com.dahu.plugins.edge.storage.MongoStore"
+    },
+    {
+      "name": "SurfaceCacheStore",
+      "jar": "DahuSurface.jar",
+      "class": "com.dahu.surface.stores.SurfaceCacheStore"
+    },
+    {
+      "name": "SurfaceMongoStore",
+      "jar": "DahuSurface.jar",
+      "class": "com.dahu.surface.stores.SurfaceMongoStore",
+      "settingsFile": "SurfaceStorage.json"
+    }
+  ],
+  "components":[
+    {
+        "name":"SolrIndexer",
+        "jar":"DahuVector.jar",
+        "class":"com.dahu.vector.indexers.solr.SolrVectorTerminator"
+    },{
+      "name":"DebugProcessor",
+      "jar":"DahuVector.jar",
+      "class":"com.dahu.vector.processors.DebugProcessor"
+    },{
+      "name":"SplitterProcessor",
+      "jar":"DahuVector.jar",
+      "class":"com.dahu.vector.processors.HierarchicalFieldSplitter"
+    },
+    {
+      "name": "MimeTypePrettifier",
+      "class": "com.dahu.vector.core.processors.MimeTypePrettifier"
+    },
+    {
+      "name":"AODocsFetchInjector",
+      "class":"com.dahu.aodocs.processors.DahuAODFetchInjector",
+      "jar":"DahuEdge.jar"
+    },
+    {
+      "name": "googleAuthenticator",
+      "class": "com.dahu.plugins.core.auth.Google.GoogleAuthenticator",
+      "settingsFile": "GoogleAuthenticator.json"
+    }
+  ],
+  "queues":[
+    {
+      "name":"vector_queue",
+      "persistent":"false"
+    },
+    {
+      "name":"seed_queue",
+      "persistent":"false"
+    }
+  ],
+  "events": [
+    {
+      "name":"solrCommit",
+      "jar":"DahuVector.jar",
+      "class":"com.dahu.vector.indexers.solr.CommitToSolr",
+      "settingsFile":"solrCommit.json"
+    }
+  ]
+}
