@@ -14,6 +14,7 @@
       "domainName":"dahu.co.uk",
       "storageAdmin":"aodocs-storage@dahu.co.uk",
       "attachmentMode": "DRIVE_CONTROLLED",
+      "LIBRARYTYPE" : "Team Folders",
       "documentTypes": {
        "items": [        {
           "name":"Document",

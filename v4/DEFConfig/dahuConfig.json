@@ -44,10 +44,10 @@
 	      "settingsFile" : "vector.json",
 	      "threads" : "1"
 	    }, {
-	      "name" : "PubSub_ReIiGJk0N4RY9XokGj",
+	      "name" : "PubSub_Qww20KE2LROQHALs5X",
 	      "jar" : "DahuEdge.jar",
 	      "class" : "com.dahu.plugins.edge.aodocs.AODocsAuditGooglePubSubMessageDispatcher",
-	      "settingsFile" : "PubSub_RozD8WgvhCPcz9NRkf.json",
+	      "settingsFile" : "PubSub_Qww20KE2LROQHALs5X.json",
 	      "threads" : "1"
 	    }
   ],

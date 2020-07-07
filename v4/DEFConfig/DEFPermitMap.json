@@ -17,12 +17,6 @@
     },
     "*@altirnao.com": {
       "permits": "search"
-    },
-    "*@canamgroupinc.com": {
-      "permits": "search"
-    },
-    "*@groupecanam.com": {
-      "permits": "search"
     }
   },
   "_COMMENT_": "permitGrants map from permits assigned to users above, and DEF resources, such as Commands and Services",
