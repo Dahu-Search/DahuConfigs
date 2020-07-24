@@ -7,21 +7,26 @@
   "DEFprotocol": "https",
   "httpPort": "80",
   "httpsPort": "443",
-  "plugins":".",
+  "plugins":"./lib",
   "crossOrigin":"true",
   "responseVersion":"2",
   "securityTokenTTL":"3600",
   "DEFPermitsFile": "DEFPermitMap.json",
+  "ArtemisJournalDir":"/data/artemis",
   "google_application_credentials": "service.json",
   "searchUI": "true",
   "apps": [
     {
       "app": "DahuSearch",
       "path": "./docRoot/DahuSearch",
-	  "default": "yes"
+      "default": "yes"
+    },
+    {
+      "app": "DahuDemo",
+      "path": "./docRoot/DahuDemo"
     }
-	],
-	"commands":[
+  ],
+  "commands":[
       {
         "name": "Surface",
         "jar": "DahuSurface.jar",
@@ -42,12 +47,12 @@
 	      "name" : "Vector",
 	      "class" : "com.dahu.vector.core.VectorService",
 	      "settingsFile" : "vector.json",
-	      "threads" : "1"
+	      "threads" : "4"
 	    }, {
-	      "name" : "PubSub_Qww20KE2LROQHALs5X",
+	      "name" : "PubSub_dahu_co_uk",
 	      "jar" : "DahuEdge.jar",
 	      "class" : "com.dahu.plugins.edge.aodocs.AODocsAuditGooglePubSubMessageDispatcher",
-	      "settingsFile" : "PubSub_Qww20KE2LROQHALs5X.json",
+	      "settingsFile" : "PubSub_dahu_co_uk.json",
 	      "threads" : "1"
 	    }
   ],

@@ -1,28 +1,14 @@
 {
-  "DEFSettings":{
-    "inputQueues":["seed_queue"],
-    "outputQueues":["vector_queue"],
-    "stores":["AODocsLibraryStore"],
-    "serviceGroup":"AODocs"
+  "DEFSettings" : {
+    "inputQueues" : [ "seed_queue" ],
+    "outputQueues" : [ "vector_queue" ],
+    "stores" : [ "AODocsLibraryStore" ],
+    "serviceGroup" : "AODocs"
   },
-  "pluginSettings":{
-    "autoStart":"true",
-    "libraries": [
-    {
-      "libraryId":"Qww20KE2LROQHALs5X",
-      "name":"My First Team Folder",
-      "domainName":"dahu.co.uk",
-      "storageAdmin":"aodocs-storage@dahu.co.uk",
-      "attachmentMode": "DRIVE_CONTROLLED",
-      "LIBRARYTYPE" : "Team Folders",
-      "documentTypes": {
-       "items": [        {
-          "name":"Document",
-          "value":"Qww22tu1dzvPc3azUp"
-        }
-       ]
-      }
-    }
-   ]
- }
+  "pluginSettings" : {
+  "autoStart" : "true",
+  "domain":"dahu.co.uk",
+  "includeLibraries": [],
+  "excludeLibraries": [] 
+  }
 }

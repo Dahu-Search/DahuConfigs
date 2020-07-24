@@ -1,6 +1,6 @@
 {
   "DEFSettings":{
-    "logLevel":"TRACE",
+    "logLevel":"INFO",
     "stores":["SurfaceCacheStore","SurfaceMongoStore"]
   },
   "pluginSettings": {
@@ -60,25 +60,25 @@
             },
             "title": {
               "group": "group2",
-              "label": "Title contains...",
+              "label": "Title",
               "mode": "field",
               "queryPrefix": "title_t"
             },
             "author": {
               "group": "group2",
-              "label": "Author contains...",
+              "label": "Author",
               "mode": "field",
               "queryPrefix": "author_combined_t"
             },
             "keywords": {
               "group": "group2",
-              "label": "Keywords contains...",
+              "label": "Keywords",
               "mode": "field",
               "queryPrefix": "keywords_aod_t"
             },
             "subject": {
               "group": "group2",
-              "label": "Subject contains...",
+              "label": "Subject",
               "mode": "field",
               "queryPrefix": "subject_aod_t"
             },
@@ -406,25 +406,27 @@
           },
           "title": {
             "group": "group2",
-            "label": "Title contains...",
+            "label": "Title",
             "mode": "field",
-            "queryPrefix": "title_t"
+            "queryPrefix": "title_t",
+			"constraint":"yes"
           },
           "author": {
             "group": "group2",
-            "label": "Author contains...",
+            "label": "Author",
             "mode": "field",
-            "queryPrefix": "author_combined_t"
+            "queryPrefix": "author_combined_t",
+			"constraint":"yes"
           },
           "keywords": {
             "group": "group2",
-            "label": "Keywords contains...",
+            "label": "Keywords",
             "mode": "field",
             "queryPrefix": "keywords_aod_t"
           },
           "subject": {
             "group": "group2",
-            "label": "Subject contains...",
+            "label": "Subject",
             "mode": "field",
             "queryPrefix": "subject_aod_t"
           },
@@ -433,13 +435,15 @@
             "label": "Folder",
             "mode": "facet",
             "facet": "folder",
-            "queryPrefix": "_hier_folderpath"
+            "queryPrefix": "_hier_folderpath",
+			"constraint":"yes"
           },
           "lmdate": {
             "group": "group3",
             "label": "Modified date",
             "mode": "dateRange",
-            "queryPrefix": "last_modified"
+            "queryPrefix": "last_modified",
+			"constraint":"yes"
           },
           "type": {
             "group": "group2",

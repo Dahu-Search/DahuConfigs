@@ -5,9 +5,8 @@
   },
   "pluginSettings" : {
     "autoStart" : "true",
-    "GoogleSubscriptionID" : "Dahu_Qww20KE2LROQHALs5X_sub",
+    "GoogleSubscriptionID" : "Dahu_dahu_co_uk_sub",
     "GoogleProjectID" : "dahu-search",
-    "libraryId" : "Qww20KE2LROQHALs5X",
     "vector_queue_name" : "vector_queue",
     "connector_queue_name" : "seed_queue",
     "components" : {
