@@ -1,8 +1,0 @@
-{
-  "DEFSettings":{},
-  "pluginSettings": {
-    "domain_admin_account":  {"type": "env","values": {"env_name": "AODOCS_DOMAIN_ADMIN","default": "vince@dahu.co.uk"}},
-    "appName":  {"type": "env","values": {"env_name": "APPNAME","default": "Dahu Search"}}
-  }
-}
-

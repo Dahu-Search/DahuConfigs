@@ -1,9 +1,0 @@
-{
-  "DEFSettings":{},
-  "pluginSettings": {
-    "google_service_jsonfile_path":  {"type": "env","values": {"env_name": "GOOGLE_SERVICE_ACCOUNT_JSON_PATH","default": "./service.json"}},
-    "domain_admin_account":  {"type": "env","values": {"env_name": "AODOCS_DOMAIN_ADMIN","default": "john.mills@cabinetoffice.gov.uk"}},
-    "appName":  {"type": "env","values": {"env_name": "APPNAME","default": "Dahu Search"}}
-  }
-}
-
