@@ -102,18 +102,18 @@ spec:
           mountPath: /tmp/service.json
       env:
         - name: GIT_APP_NAME
-          value: DahuSearchForAODocs-Dahu
+          value: $GIT_REPO_APPLICATION_NAME
         - name: AODOCS_DOMAIN_ADMIN
           value: $EMAIL
         - name: APPNAME
           value: "Dahu Search"
         - name: GIT_REPO
-          value: dahu.codebasehq.com
+          value: $GIT_REPOSITORY_SERVER
         - name: GIT_REPO_URL
-          value: "https://dahu.codebasehq.com/client-kits/customer-kits.git"
+          value: "$GIT_REPO_URL"
         - name: GIT_USERNAME
           value: $EMAIL(URL-ENCODED)
         - name: GIT_PASSWORD
           value: $PASSWORD
         - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: $PATH TO GOOGLE SERVICE ACCOUNT JSON FILE
+          value: /tmp/service.json/service.json
