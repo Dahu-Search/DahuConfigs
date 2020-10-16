@@ -3,354 +3,14 @@
     "logLevel":"INFO",
     "stores":["SurfaceCacheStore","SurfaceMongoStore"]
   },
-  "pluginSettings": {
-      "Dahu Demo": {
-        "server": "http://localhost:8983/solr",
-        "collection": "aodocs_index",
-        "GoogleServiceAccountJsonFile": "service.json",
-        "GoogleServiceAccountAdminUser": "chris@dahu.co.uk",
-        "securityField": "ao_permission_ss",
-        "boostFields" : "title_t^3 subject_aod_t^2 author_combined_t^2 to_aod_t^2 from_aod_t^2 _text_",
-        "snippets": "true",
-        "suggest": {
-          "suggestTypes": ["terms"]
-        },
-        "export": {
-          "excludedFields": ["id","permission","folder"]
-        },
-        "sort": {
-          "rel": {
-            "label": "Most Relevant",
-            "sortSpec":"score desc"
-          },
-          "dateDesc": {
-            "label": "Date (newest first)",
-            "sortSpec":"last_modified desc"
-          },
-          "dateAsc": {
-            "label": "Date (oldest first)",
-            "sortSpec":"last_modified asc"
-          }
-        },
-        "filters": {
-          "groups":{
-            "group1": {
-              "order": 1,
-              "label": "Content type"
-            },
-            "group2": {
-              "order": 2,
-              "label": "Meta-data values"
-            },
-            "group3": {
-              "order": 3,
-              "label": "Dates"
-            },
-            "group4": {
-              "order": 4,
-              "label": "Folders"
-            }
-          },
-          "filters": {
-            "email": {
-              "group": "group1",
-              "label": "Exclude emails",
-              "mode": "switch",
-              "query": "NOT classname_s:Correspondence"
-            },
-            "title": {
-              "group": "group2",
-              "label": "Title",
-              "mode": "field",
-              "queryPrefix": "title_t"
-            },
-            "author": {
-              "group": "group2",
-              "label": "Author",
-              "mode": "field",
-              "queryPrefix": "author_combined_t"
-            },
-            "keywords": {
-              "group": "group2",
-              "label": "Keywords",
-              "mode": "field",
-              "queryPrefix": "keywords_aod_t"
-            },
-            "subject": {
-              "group": "group2",
-              "label": "Subject",
-              "mode": "field",
-              "queryPrefix": "subject_aod_t"
-            },
-            "folder": {
-              "group": "group4",
-              "label": "Folder",
-              "mode": "facet",
-              "facet": "folder",
-              "queryPrefix": "_hier_folderpath"
-            },
-            "lmdate": {
-              "group": "group3",
-              "label": "Modified date",
-              "mode": "dateRange",
-              "queryPrefix": "last_modified"
-            },
-            "type": {
-              "group": "group2",
-              "label": "Doc Type",
-              "mode": "pullDown",
-              "queryPrefix": "mime_s",
-              "values":{
-                "pdf": {
-                  "label": "pdf",
-                  "value": "application/pdf"
-                },
-                "Word": {
-                  "label": "MS-Word",
-                  "value": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                },
-                "zip": {
-                  "label": "Zip files",
-                  "value": "application/zip"
-                }
-              }
-            }
-          }
-        },
-
-        "facets": {
-          "folder": {
-            "label": "Folders",
-            "mode": "hierarchical",
-            "display": "standard",
-            "order": "1",
-            "cached": "true",
-            "cacheTimeout": "30000",
-            "solrConfig": {
-              "type": "terms",
-              "field": "_hier_folderpath",
-              "limit": -1
-            }
-          },
-          "keywords": {
-            "label": "Keywords",
-            "order": "2",
-            "display": "standard",
-            "solrConfig": {
-              "field": "keywords_aod_ss"
-            }
-          },
-          "project": {
-            "label": "Project",
-            "order": "3",
-            "display": "standard",
-            "solrConfig": {
-              "field": "project_aod_ss"
-            }
-          },
-
-          "docType": {
-            "label": "Document Type",
-            "order": "4",
-            "display": "standard",
-            "solrConfig": {
-              "field": "document_type_aod_ss"
-            }
-          },
-          "mime": {
-            "label": "File type",
-            "order": "5",
-            "display": "histogram",
-            "solrConfig": {
-              "field": "displaymime_s"
-            }
-          },
-
-          "to": {
-            "label": "To",
-            "order": "6",
-            "display": "standard",
-            "solrConfig": {
-              "field": "to_aod_s"
-            }
-          },
-          "from": {
-            "label": "From",
-            "order": "7",
-            "display": "standard",
-            "solrConfig": {
-              "field": "from_aod_s"
-            }
-          },
-
-          "class": {
-            "label": "Class",
-            "order": "8",
-            "display": "histogram",
-            "solrConfig": {
-              "field": "classname_s"
-            }
-          },
-          "owner": {
-            "label": "Author",
-            "mode": "multiSelect",
-            "display": "standard",
-            "order": "9",
-            "cached": "true",
-            "solrConfig": {
-              "type": "terms",
-              "field": "author_combined_ss"
-            }
-          }
-        },
-        "fields": {
-          "id": {
-            "fieldName": "id"
-          },
-          "title": {
-            "fieldName": "title_t"
-          },
-          "url": {
-            "fieldName": "url_s"
-          },
-          "thumbnail": {
-            "fieldName": "iconurl_s"
-          },
-          "type": {
-            "fieldName": "displaymime_s"
-          },
-          "comments": {
-            "fieldName": "comments_t"
-          },
-
-          "metaFields": [
-            {
-              "date": {
-                "label": "Date",
-                "fieldNames": ["last_modified"],
-                "transform": "dateDisplay",
-                "transformFormat": "dd MMMM yyyy"
-              }
-            },
-            {
-              "subject": {
-                "label": "Subject",
-                "fieldNames": ["subject_aod_s"]
-              }
-            },
-            {
-              "Size": {
-                "fieldNames": ["size_l","size_ww"],
-                "transform": "sizeDisplay"
-              }
-            },
-            {
-              "Author": {
-                "facet" : "author",
-                "fieldNames": "author_combined_ss"
-              }
-            },
-            {
-              "To": {
-                "facet" : "to",
-                "fieldNames": "to_aod_s"
-              }
-            },
-            {
-              "aodocstype": {
-                "facet" : "from",
-                "label": "AODOCS type",
-                "fieldNames": "document_type_aod_ss"
-              }
-            },
-            {
-              "From": {
-                "facet" : "from",
-                "fieldNames": "from_aod_s"
-              }
-            }
-          ],
-          "subMetaFields": [
-            {
-              "gdrive": {
-                "label": "Google Doc download",
-                "fieldNames": ["gdriveurl_s"],
-                "transform": "urlDisplay"
-
-              }
-            },
-            {
-              "library": {
-                "label": "Library",
-                "facet": "library",
-                "fieldNames": ["libraryname_s"]
-              }
-            },
-            {
-              "attachments": {
-                "label": "Attachments",
-                "fieldNames": ["attachmentname_ss"]
-              }
-            },
-            {
-              "type": {
-                "label": "Type",
-                "facet": "mime",
-                "fieldNames": ["displaymime_s"]
-              }
-            },
-            {
-              "project": {
-                "fieldNames": ["project_aod_ss"]
-              }
-            },
-            {
-              "filepath": {
-                "fieldNames": ["filepath_t"]
-              }
-            },
-            {
-              "keywords": {
-                "fieldNames": ["keywords_aod_t"]
-              }
-            }
-          ],
-          "additionalMetaFields": [
-            {
-              "version": {
-                "label": "Version",
-                "fieldNames": ["versiondescription_t"]
-              }
-            },
-            {
-              "folder": {
-                "label": "Folder",
-                "fieldNames": ["_hier_folderpath"]
-              }
-            },
-            {
-              "libraryid": {
-                "label": "LibraryId",
-                "fieldNames": ["libraryid_s"]
-              }
-            },
-            {
-              "domain": {
-                "label": "Domain",
-                "fieldNames": ["domain_s"]
-              }
-            }
-          ]
-        }
-      },
-  
+  "pluginSettings": {  
     "Dahu Search": {
       "server": "http://localhost:8983/solr",
       "collection": "aodocs_index",
       "GoogleServiceAccountJsonFile": "service.json",
       "GoogleServiceAccountAdminUser": "chris@dahu.co.uk",
       "securityField": "ao_permission_ss",
-      "boostFields" : "title_t^3 subject_aod_t^2 author_combined_t^2 to_aod_t^2 from_aod_t^2 _text_",
+      "boostFields" : "title_t^3 subject_t^2 initialauthor_ss^2 to_t^2 from_t^2 _text_",
       "snippets": "true",
       "suggest": {
         "suggestTypes": ["terms"]
@@ -365,11 +25,11 @@
         },
         "dateDesc": {
           "label": "Date (newest first)",
-          "sortSpec":"last_modified desc"
+          "sortSpec":"last_modified_date desc"
         },
         "dateAsc": {
           "label": "Date (oldest first)",
-          "sortSpec":"last_modified asc"
+          "sortSpec":"last_modified_date asc"
         }
       },
       "filters": {
@@ -392,18 +52,6 @@
           }
         },
         "filters": {
-          "acts": {
-            "group": "group1",
-            "label": "Exclude Acts",
-            "mode": "switch",
-            "query": "NOT classname_s:Act"
-          },
-          "email": {
-            "group": "group1",
-            "label": "Exclude emails",
-            "mode": "switch",
-            "query": "NOT classname_s:Correspondence"
-          },
           "title": {
             "group": "group2",
             "label": "Title",
@@ -415,41 +63,29 @@
             "group": "group2",
             "label": "Author",
             "mode": "field",
-            "queryPrefix": "author_combined_t",
+            "queryPrefix": "initialauthor_ss",
 			"constraint":"yes"
-          },
-          "keywords": {
-            "group": "group2",
-            "label": "Keywords",
-            "mode": "field",
-            "queryPrefix": "keywords_aod_t"
-          },
-          "subject": {
-            "group": "group2",
-            "label": "Subject",
-            "mode": "field",
-            "queryPrefix": "subject_aod_t"
           },
           "folder": {
             "group": "group4",
             "label": "Folder",
             "mode": "facet",
             "facet": "folder",
-            "queryPrefix": "_hier_folderpath",
-			"constraint":"yes"
+            "queryPrefix": "_hier_folderpath_ss",
+            "constraint":"yes"
           },
           "lmdate": {
             "group": "group3",
             "label": "Modified date",
             "mode": "dateRange",
-            "queryPrefix": "last_modified",
+            "queryPrefix": "last_modified_date",
 			"constraint":"yes"
           },
           "type": {
             "group": "group2",
             "label": "Doc Type",
             "mode": "pullDown",
-            "queryPrefix": "mime_s",
+            "queryPrefix": "mime_type_s",
             "values":{
               "pdf": {
                 "label": "pdf",
@@ -478,33 +114,8 @@
           "cacheTimeout": "30000",
           "solrConfig": {
             "type": "terms",
-            "field": "_hier_folderpath",
+            "field": "_hier_folderpath_ss",
             "limit": -1
-          }
-        },
-        "keywords": {
-          "label": "Keywords",
-          "order": "2",
-          "display": "standard",
-          "solrConfig": {
-            "field": "keywords_aod_ss"
-          }
-        },
-        "project": {
-          "label": "Project",
-          "order": "3",
-          "display": "standard",
-          "solrConfig": {
-            "field": "project_aod_ss"
-          }
-        },
-
-        "docType": {
-          "label": "Document Type",
-          "order": "4",
-          "display": "standard",
-          "solrConfig": {
-            "field": "document_type_aod_ss"
           }
         },
         "mime": {
@@ -512,16 +123,15 @@
           "order": "5",
           "display": "histogram",
           "solrConfig": {
-            "field": "displaymime_s"
+            "field": "doctype_s"
           }
         },
-
         "to": {
           "label": "To",
           "order": "6",
           "display": "standard",
           "solrConfig": {
-            "field": "to_aod_s"
+            "field": "to_s"
           }
         },
         "from": {
@@ -529,7 +139,7 @@
           "order": "7",
           "display": "standard",
           "solrConfig": {
-            "field": "from_aod_s"
+            "field": "from_s"
           }
         },
 
@@ -549,7 +159,7 @@
           "cached": "true",
           "solrConfig": {
             "type": "terms",
-            "field": "author_combined_ss"
+            "field": "initialauthor_ss"
           }
         }
       },
@@ -563,21 +173,29 @@
         "url": {
           "fieldName": "url_s"
         },
+        "type": {
+          "fieldName": "filetype_s"
+        },
         "thumbnail": {
           "fieldName": "iconurl_s"
         },
-        "type": {
-          "fieldName": "displaymime_s"
+	"parentTitle": {
+          "fieldName": "parent_title_s"
+        },
+        "parentUrl": {
+          "fieldName": "parent_url_s"
+        },
+        "parentType": {
+          "fieldName": "sourcetype_s"
         },
         "comments": {
           "fieldName": "comments_t"
         },
-
         "metaFields": [
           {
             "date": {
               "label": "Date",
-              "fieldNames": ["last_modified"],
+              "fieldNames": ["last_modified_date"],
               "transform": "dateDisplay",
               "transformFormat": "dd MMMM yyyy"
             }
@@ -585,7 +203,7 @@
           {
             "subject": {
               "label": "Subject",
-              "fieldNames": ["subject_aod_s"]
+              "fieldNames": ["subject_s"]
             }
           },
           {
@@ -597,26 +215,19 @@
           {
             "Author": {
               "facet" : "author",
-              "fieldNames": "author_combined_ss"
+              "fieldNames": "initialauthor_ss"
             }
           },
           {
             "To": {
               "facet" : "to",
-              "fieldNames": "to_aod_s"
-            }
-          },
-          {
-            "aodocstype": {
-              "facet" : "from",
-              "label": "AODOCS type",
-              "fieldNames": "document_type_aod_ss"
+              "fieldNames": "to_s"
             }
           },
           {
             "From": {
               "facet" : "from",
-              "fieldNames": "from_aod_s"
+              "fieldNames": "from_s"
             }
           }
         ],
@@ -624,7 +235,7 @@
           {
             "gdrive": {
               "label": "Google Doc download",
-              "fieldNames": ["gdriveurl_s"],
+              "fieldNames": ["gdrive_url_s"],
               "transform": "urlDisplay"
 
             }
@@ -646,12 +257,12 @@
             "type": {
               "label": "Type",
               "facet": "mime",
-              "fieldNames": ["displaymime_s"]
+              "fieldNames": ["doctype_s"]
             }
           },
           {
             "project": {
-              "fieldNames": ["project_aod_ss"]
+              "fieldNames": ["project_ss"]
             }
           },
           {
@@ -661,17 +272,11 @@
           },
           {
             "keywords": {
-              "fieldNames": ["keywords_aod_t"]
+              "fieldNames": ["keywords_t"]
             }
           }
         ],
         "additionalMetaFields": [
-          {
-            "permission": {
-              "label": "Permissions",
-              "fieldNames": ["ao_permission_s"]
-            }
-          },
           {
             "version": {
               "label": "Version",
@@ -681,7 +286,7 @@
           {
             "folder": {
               "label": "Folder",
-              "fieldNames": ["_hier_folderpath"]
+              "fieldNames": ["_hier_folderpath_s"]
             }
           },
           {
@@ -695,6 +300,16 @@
               "label": "Domain",
               "fieldNames": ["domain_s"]
             }
+          },{
+            "class_id":{
+              "label":"Class ID",
+              "fieldNames":["class_id_s"]
+            }
+          },{
+            "state":{
+              "label":"State",
+              "fieldNames":["state_s"]
+              }
           }
         ]
       }

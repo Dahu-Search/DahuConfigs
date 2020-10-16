@@ -1,29 +1,28 @@
 {
-  "logLevel":"DEBUG",
+  "logLevel":"INFO",
   "name":"DEF 4 AODocs",
   "threads":"40",
   "admin":"true",
-  "adminUI":"false",
+  "adminUI":"true",
   "DEFprotocol": "https",
   "httpPort": "80",
   "httpsPort": "443",
+  "adminHttpPort": "8080",
+  "adminHttpsPort": "10101",
+  "adminDocRoot": "./adminRoot",
+  "adminUI": "true",
   "plugins":"./lib",
   "crossOrigin":"true",
   "responseVersion":"2",
-  "securityTokenTTL":"3600",
+  "securityTokenTTL":"14600",
   "DEFPermitsFile": "DEFPermitMap.json",
   "ArtemisJournalDir":"/data/artemis",
-  "google_application_credentials": "service.json",
   "searchUI": "true",
   "apps": [
     {
       "app": "DahuSearch",
       "path": "./docRoot/DahuSearch",
       "default": "yes"
-    },
-    {
-      "app": "DahuDemo",
-      "path": "./docRoot/DahuDemo"
     }
   ],
   "commands":[
@@ -49,10 +48,10 @@
 	      "settingsFile" : "vector.json",
 	      "threads" : "4"
 	    }, {
-	      "name" : "PubSub_dahu_co_uk",
+	      "name" : "PubSub",
 	      "jar" : "DahuEdge.jar",
 	      "class" : "com.dahu.plugins.edge.aodocs.AODocsAuditGooglePubSubMessageDispatcher",
-	      "settingsFile" : "PubSub_dahu_co_uk.json",
+	      "settingsFile" : "PubSub.json",
 	      "threads" : "1"
 	    }
   ],
@@ -87,10 +86,6 @@
       "name":"SplitterProcessor",
       "jar":"DahuVector.jar",
       "class":"com.dahu.vector.processors.HierarchicalFieldSplitter"
-    },
-    {
-      "name": "MimeTypePrettifier",
-      "class": "com.dahu.vector.core.processors.MimeTypePrettifier"
     },
     {
       "name":"AODocsFetchInjector",

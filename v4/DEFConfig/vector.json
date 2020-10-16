@@ -12,10 +12,7 @@
       },
       "SplitterProcessor":{
         "priority":"1",
-        "hier_metanames":"folderpath"
-      },
-      "MimeTypePrettifier": {
-        "priority": "2"
+        "hier_metanames":"folderpath_s"
       },
       "SolrIndexer": {
         "priority": "99",
