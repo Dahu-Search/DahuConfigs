@@ -17,7 +17,7 @@ const configs = {
     ]
     ,
     google :{
-        googleclientid : "360146944373-fc0ueql4fm9kqfu75g5re86h3sdp68tk.apps.googleusercontent.com",
+        googleclientid : "805768663285-724c59pq324upankulflkq0t2idconsq.apps.googleusercontent.com",
         endUserEmulation:false
     },
     azure :{

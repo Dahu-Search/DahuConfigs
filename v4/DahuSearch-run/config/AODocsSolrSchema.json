@@ -69,6 +69,6 @@
 
     {"idocField":"fieldtoignore1", "ignore": true},
     {"idocField":"*fieldstoignore", "ignore": true},
-    {"idocField":"fieldstoignore*", "ignore": true},
+    {"idocField":"fieldstoignore*", "ignore": true}
   ]
 }

@@ -6,7 +6,7 @@
   "pluginSettings" : {
     "autoStart" : "true",
     "GoogleSubscriptionID" : "Dahu_dahu_co_uk_sub",
-    "GoogleProjectID" : "dahu-search",
+    "GoogleProjectID" : "dahu-aodocs-test",
     "vector_queue_name" : "vector_queue",
     "connector_queue_name" : "seed_queue",
     "components" : {

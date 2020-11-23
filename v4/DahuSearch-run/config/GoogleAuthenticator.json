@@ -1,7 +1,7 @@
 {
   "DEFSettings":{},
   "pluginSettings": {
-    "googleclientid" : "360146944373-fc0ueql4fm9kqfu75g5re86h3sdp68tk.apps.googleusercontent.com",
+    "googleclientid" : "805768663285-724c59pq324upankulflkq0t2idconsq.apps.googleusercontent.com",
 	"enduseremulation":"false",
     "domain_admin_account":  {"type": "env","values": {"env_name": "GOOGLE_DOMAIN_ADMIN","default": "chris@dahu.co.uk"}},
     "appName":  {"type": "env","values": {"env_name": "APPNAME","default": "Dahu Search"}}
